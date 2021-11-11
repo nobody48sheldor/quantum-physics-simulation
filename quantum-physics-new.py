@@ -6,6 +6,7 @@ from matplotlib import cm
 #import cython
 import os
 from matplotlib import style
+import time
 
 style.use('dark_background')
 
@@ -60,15 +61,12 @@ if save_option3 == "y":
 
 L = 10
 n = 400
-nt = int(200*n/2)
+nt = int(200*n)
 alpha = 1
 m = 1
 h = 6.62607015 * (10**(-34))
 hbar = 1
 P = 4
-
-T = 2*L/(400)
-print(T)
 
 x =np.linspace(-L, L, n)
 y =np.linspace(-L, L, n)
@@ -280,10 +278,12 @@ if save == True:
 
     os.chdir("..")
 
-
+Time = time.time()
 for i in range(1, nt - 2):
     os.system("clear")
-    print(int(100*i/nt), " %", "    [", i, " / ", nt, "]")
+    delta = time.time() - Time
+    Time = time.time()
+    print(int(100*i/nt), " %", "    [", i, " / ", nt, "]", "    ", "remaining : ", delta*(nt - 2 - i), "secondes")
     psiy = []
     psiyR = []
     psiyI = []
